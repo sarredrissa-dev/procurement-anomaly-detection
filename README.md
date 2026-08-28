@@ -64,6 +64,12 @@ Week 1 — Project setup complete ✅
 
 Dataset downloaded and saved locally ✅
 
+Capstone Proposal — v3.0 (updated per stakeholder review) ✅
+
+Project Charter — v1.2 (updated per stakeholder review) ✅
+
+Awaiting instructor approval — September 2026 ⏳
+
 
 
 \---
