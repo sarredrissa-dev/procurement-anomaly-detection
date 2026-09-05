@@ -66,9 +66,9 @@ Dataset downloaded and saved locally ✅
 
 Capstone Proposal — v3.0 (updated per stakeholder review) ✅
 
-Project Charter — v1.2 (updated per stakeholder review) ✅
+Project Charter v1.2 — Approved by instructor ✅
 
-Awaiting instructor approval — September 2026 ⏳
+Unit 1 Discussion Post — Submitted ✅
 
 
 
