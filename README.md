@@ -64,11 +64,12 @@ Week 1 — Project setup complete ✅
 
 Dataset downloaded and saved locally ✅
 
-Capstone Proposal — v3.0 (updated per stakeholder review) ✅
+Capstone Proposal — v5.0 (updated per stakeholder review) ✅
 
-Project Charter v1.2 — Approved by instructor ✅
+Project Charter v1.4 — ✅
 
 Unit 1 Discussion Post — Submitted ✅
+Unit 2 Assignment Activity — Submitted ✅
 
 
 
