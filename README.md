@@ -77,6 +77,18 @@ Unit 3 Assignment — Submitted ✅
 
 System Architecture Diagram — Added to /database folder ✅
 
+Unit 4 CI/CD Report — Submitted ✅
+
+Unit 4 Identity Verification + Demo Video — Submitted ✅
+
+Database created — 5 tables, 3 views, 26 indexes ✅
+
+ETL pipeline tested — 47,540 records, 31 synthetic, 621 outliers ✅
+
+EDA complete — 6 charts generated in /docs folder ✅
+
+
+
 
 
 
