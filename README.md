@@ -87,6 +87,10 @@ ETL pipeline tested — 47,540 records, 31 synthetic, 621 outliers ✅
 
 EDA complete — 6 charts generated in /docs folder ✅
 
+Unit 5 ML Module — Isolation Forest + Z-Score — 2,397 flags generated ✅
+
+Unit 5 PyTest — 34/34 tests passed ✅
+
 
 
 
