@@ -1,0 +1,162 @@
+<mxfile host="app.diagrams.net" modified="2026-09-01T00:00:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="Data Flow Diagram" id="dataflow">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Figure 2: Data Flow Diagram — ETL to Dashboard Pipeline&#xa;Government Procurement Anomaly Detection System" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;fontColor=#1F4E79;" vertex="1" parent="1">
+          <mxGeometry x="80" y="20" width="1000" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- EXTERNAL ENTITY: USASpending.gov -->
+        <mxCell id="source" value="USASpending.gov&#xa;FY2023 DoD Contracts&#xa;(External Data Source)" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESS 1: ETL Pipeline -->
+        <mxCell id="proc1" value="1.0&#xa;ETL Pipeline&#xa;(pandas + SQLAlchemy)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1F4E79;strokeColor=#1F4E79;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="110" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESS 2: Synthetic Injection -->
+        <mxCell id="proc2" value="2.0&#xa;Synthetic Anomaly&#xa;Injection Module" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2E75B6;strokeColor=#1F4E79;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="280" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- DATA STORE: PostgreSQL -->
+        <mxCell id="db" value="D1: PostgreSQL Database&#xa;(vendors, contracts,&#xa;procurement_records,&#xa;anomaly_flags, audit_log)" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="200" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESS 3: ML Detection -->
+        <mxCell id="proc3" value="3.0&#xa;ML Detection Module&#xa;(Z-Score + Isolation Forest)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=#6F0000;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="380" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESS 4: Explainability -->
+        <mxCell id="proc4" value="4.0&#xa;Explainability Engine&#xa;(Factor-level descriptions)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#960000;strokeColor=#6F0000;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="480" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESS 5: RBAC -->
+        <mxCell id="proc5" value="5.0&#xa;RBAC Security&#xa;(Auth + Role Check)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C00000;strokeColor=#990000;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="560" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESS 6: Dashboard -->
+        <mxCell id="proc6" value="6.0&#xa;Streamlit Dashboard&#xa;(Analyst Interface)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7030A0;strokeColor=#4B006E;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="380" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- EXTERNAL ENTITY: Analyst -->
+        <mxCell id="analyst" value="Government Auditor&#xa;(Analyst User)" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="560" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- DATA STORE: Audit Log -->
+        <mxCell id="auditlog" value="D2: Audit Log&#xa;(Access failures,&#xa;actionability feedback)" style="shape=mxgraph.dfd.dataStore;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- FLOWS -->
+        <!-- Source to ETL -->
+        <mxCell id="f1" value="Raw CSV bulk download" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1F4E79;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="source" target="proc1" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ETL to DB -->
+        <mxCell id="f2" value="Clean normalized records" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1F4E79;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="proc1" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ETL to Synthetic -->
+        <mxCell id="f3" value="Real distribution stats" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2E75B6;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="proc1" target="proc2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Synthetic to DB -->
+        <mxCell id="f4" value="Synthetic anomaly records" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2E75B6;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="proc2" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- DB to ML -->
+        <mxCell id="f5" value="Procurement records + synthetic labels" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="db" target="proc3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ML to DB (store results) -->
+        <mxCell id="f6" value="Anomaly scores (IF + z-score)" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2;dashed=1;fontStyle=1;fontSize=10;" edge="1" source="proc3" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="430" />
+              <mxPoint x="820" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ML to Explainability -->
+        <mxCell id="f7" value="Score + feature values" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#960000;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="proc3" target="proc4" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Explainability to DB -->
+        <mxCell id="f8" value="Factor explanations stored" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#960000;strokeWidth=2;dashed=1;fontStyle=1;fontSize=10;" edge="1" source="proc4" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="580" />
+              <mxPoint x="430" y="650" />
+              <mxPoint x="720" y="650" />
+              <mxPoint x="720" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DB to Dashboard (via RBAC) -->
+        <mxCell id="f9" value="Authenticated query results" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#7030A0;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="db" target="proc6" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- RBAC to Dashboard -->
+        <mxCell id="f10" value="Role-verified session" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#C00000;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="proc5" target="proc6" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Dashboard to Analyst -->
+        <mxCell id="f11" value="Flagged contracts + explainable scores + disclaimer" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#7030A0;strokeWidth=2;fontStyle=1;fontSize=10;" edge="1" source="proc6" target="analyst" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Analyst feedback to DB -->
+        <mxCell id="f12" value="Actionability feedback" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#7030A0;strokeWidth=2;dashed=1;fontStyle=1;fontSize=10;" edge="1" source="analyst" target="db" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="640" />
+              <mxPoint x="1060" y="720" />
+              <mxPoint x="720" y="720" />
+              <mxPoint x="720" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- RBAC to Audit Log -->
+        <mxCell id="f13" value="Access failure logs" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#C00000;strokeWidth=2;dashed=1;fontStyle=1;fontSize=10;" edge="1" source="proc5" target="auditlog" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="leg_bg" value="" style="rounded=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="80" y="680" width="1000" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_title" value="Legend:" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontStyle=1;fontColor=#1F4E79;" vertex="1" parent="1">
+          <mxGeometry x="90" y="690" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="Ellipse = Process  |  Open Rectangle = Data Store  |  Shaded Rectangle = External Entity  |  Solid arrow = Primary data flow  |  Dashed arrow = Secondary/feedback flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="160" y="695" width="900" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

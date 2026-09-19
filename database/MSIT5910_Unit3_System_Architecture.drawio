@@ -1,0 +1,134 @@
+<mxfile host="Electron" agent="Claude">
+  <diagram name="System Architecture" id="system-architecture">
+    <mxGraphModel dx="975" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1F4E79;" value="Government Procurement Anomaly Detection System&#xa;System Architecture Diagram — Five-Layer Architecture" vertex="1">
+          <mxGeometry height="60" width="1250" x="200" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" value="Layer 1: Data Source Layer" vertex="1">
+          <mxGeometry height="100" width="1250" x="200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="usaspending" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#82b366;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="USASpending.gov&#xa;FY2023 DoD Contracts&#xa;(CSV Bulk Download)" vertex="1">
+          <mxGeometry height="60" width="220" x="600" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;fontColor=#374E1F;" value="Publicly available open government procurement data — freely licensed for research and analysis" vertex="1">
+          <mxGeometry height="20" width="1250" x="200" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1_2" edge="1" parent="1" source="usaspending" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1F4E79;strokeWidth=2;fontStyle=1;fontSize=10;" target="etl_module" value="Raw CSV">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" value="Layer 2: ETL Processing Layer" vertex="1">
+          <mxGeometry height="140" width="1250" x="200" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="etl_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F4E79;strokeColor=#1F4E79;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Module 1: ETL Pipeline&#xa;━━━━━━━━━━━━━━━━&#xa;• Load CSV in chunks (pandas)&#xa;• Remove null-heavy columns&#xa;• Normalize data types&#xa;• Validate and clean records&#xa;• Inject synthetic anomalies" vertex="1">
+          <mxGeometry height="90" width="280" x="280" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="synthetic" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E75B6;strokeColor=#1F4E79;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Synthetic Anomaly Injection&#xa;━━━━━━━━━━━━━━━━━━━━━━&#xa;• Value injection: contracts &gt;3σ above&#xa;  category mean (real distribution)&#xa;• Vendor injection: near-duplicate&#xa;  names (shell company patterns)&#xa;[Peer 1 feedback]" vertex="1">
+          <mxGeometry height="90" width="300" x="620" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="env_creds" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8000;strokeColor=#d6b656;fontColor=#ffffff;fontSize=10;" value=".env File&#xa;(python-dotenv)&#xa;DB Credentials&#xa;[OWASP A02:2025]" vertex="1">
+          <mxGeometry height="80" width="160" x="990" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;fontColor=#08306B;" value="Python — pandas, SQLAlchemy, python-dotenv  |  Credentials managed via .env (never committed to GitHub)  |  OWASP A02:2025 Security Misconfiguration addressed" vertex="1">
+          <mxGeometry height="15" width="1250" x="200" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2_3" edge="1" parent="1" source="etl_module" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1F4E79;strokeWidth=2;fontStyle=1;fontSize=10;" target="db_module" value="Clean data + synthetic flags">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" value="Layer 3: Database Layer" vertex="1">
+          <mxGeometry height="160" width="1250" x="200" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="db_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d6b656;strokeColor=#997300;fontColor=#000000;fontSize=10;align=left;spacingLeft=8;" value="Module 2: PostgreSQL Database&#xa;━━━━━━━━━━━━━━━━━━━━━━━&#xa;vendors table&#xa;contracts table&#xa;procurement_records table&#xa;anomaly_flags table (IF score + z-score independently)&#xa;audit_log table" vertex="1">
+          <mxGeometry height="110" width="340" x="280" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="rbac_db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C00000;strokeColor=#990000;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="RBAC — DB Layer&#xa;━━━━━━━━━━━━━━&#xa;analyst_role: READ ONLY&#xa;admin_role: READ + WRITE&#xa;[OWASP A01:2025]&#xa;Defense in Depth Layer 2" vertex="1">
+          <mxGeometry height="110" width="240" x="700" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;fontColor=#5A3E00;" value="PostgreSQL 18  |  Normalized schema (3NF)  |  Role-based permissions enforced at DB layer independently of application layer  |  Parameterized queries (SQLAlchemy) prevent SQL injection" vertex="1">
+          <mxGeometry height="15" width="1250" x="200" y="562" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3_4a" edge="1" parent="1" source="db_module" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1F4E79;strokeWidth=2;fontStyle=1;fontSize=10;" target="ml_module" value="Procurement records">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layer4_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" value="Layer 4: Analytics Layer" vertex="1">
+          <mxGeometry height="200" width="1250" x="200" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="ml_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=#6F0000;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Module 3: ML Detection Module&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Z-Score Baseline (Unit 4)&#xa;• Flags contracts &gt;3σ above category mean&#xa;• Interpretable price outlier baseline&#xa;&#xa;Isolation Forest (Unit 5)&#xa;• contamination = 0.05 [Peer 1]&#xa;• Features: amount, vendor_freq, award_doy, name_sim&#xa;• Tuned iteratively on false positive rate" vertex="1">
+          <mxGeometry height="150" width="320" x="240" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="eval_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C00000;strokeColor=#6F0000;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Evaluation Metrics&#xa;━━━━━━━━━━━━━━━━&#xa;• Precision + Recall&#xa;  (using synthetic labels)&#xa;• Actionability Rate&#xa;  target: 85% [Peer 2]&#xa;  (Herreros-Martinez et al., 2025)&#xa;• Both scores stored independently" vertex="1">
+          <mxGeometry height="150" width="260" x="620" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="xai_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#960000;strokeColor=#6F0000;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Explainability Engine&#xa;━━━━━━━━━━━━━━━━━━&#xa;Generates factor-level&#xa;explanations per flag:&#xa;• Value deviation (σ above mean)&#xa;• Vendor name similarity score&#xa;• Fiscal year-end clustering&#xa;[Peer 3 feedback — XAI]" vertex="1">
+          <mxGeometry height="150" width="260" x="940" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4_3" edge="1" parent="1" source="ml_module" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;strokeColor=#C00000;strokeWidth=2;dashed=1;fontStyle=1;fontSize=10;" target="db_module" value="Store anomaly scores">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="725" />
+              <mxPoint x="1180" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow4_5" edge="1" parent="1" source="ml_module" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1F4E79;strokeWidth=2;fontStyle=1;fontSize=10;" target="dashboard_module" value="Flagged contracts + scores + explanations">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layer5_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" value="Layer 5: Presentation Layer" vertex="1">
+          <mxGeometry height="220" width="1250" x="200" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="dashboard_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7030A0;strokeColor=#4B006E;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Module 4: Streamlit Dashboard&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Per flagged contract displays:&#xa;① Contract metadata (vendor, amount, agency, date)&#xa;② IF score + z-score side by side [Peer 1]&#xa;③ Explainable risk factors in plain language [Peer 3]&#xa;④ Disclaimer: &#39;Flag = risk indicator, NOT fraud&#39; [Peers 1,2,3]&#xa;⑤ Actionability feedback: 👍 Actionable / 👎 Not actionable [Peer 2]&#xa;Summary panel: total flags, actionability rate, top vendors" vertex="1">
+          <mxGeometry height="160" width="480" x="240" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="rbac_app" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C00000;strokeColor=#990000;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Module 5: RBAC Security&#xa;━━━━━━━━━━━━━━━━━━━━&#xa;Application Layer (Layer 1 of 3)&#xa;• Analyst: dashboard view only&#xa;• Admin: + config panel&#xa;• Session token validation&#xa;[OWASP A01:2025 + A07:2025]&#xa;Defense in Depth Layer 1" vertex="1">
+          <mxGeometry height="160" width="260" x="780" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="ethics_module" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4B006E;strokeColor=#4B006E;fontColor=#ffffff;fontSize=10;align=left;spacingLeft=8;" value="Module 6: Ethics &amp; Governance&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;• Ethical use policy document&#xa;• 3 bias sources documented&#xa;• Anomaly vs fraud guidance&#xa;• False positive protocol&#xa;• Actionability feedback loop" vertex="1">
+          <mxGeometry height="160" width="260" x="1100" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst_user" parent="1" style="shape=mxgraph.basic.person;fillColor=#2E75B6;strokeColor=#1F4E79;fontColor=#ffffff;fontSize=10;fontStyle=1;" value="👤 Analyst User&#xa;(Read Only)" vertex="1">
+          <mxGeometry height="70" width="60" x="320" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_user" parent="1" style="shape=mxgraph.basic.person;fillColor=#C00000;strokeColor=#990000;fontColor=#ffffff;fontSize=10;fontStyle=1;" value="👤 Admin User&#xa;(Read + Write)" vertex="1">
+          <mxGeometry height="70" width="60" x="420" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow_feedback" edge="1" parent="1" source="dashboard_module" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;strokeColor=#7030A0;strokeWidth=2;dashed=1;fontStyle=2;fontSize=10;" target="db_module" value="Actionability feedback stored">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="970" />
+              <mxPoint x="180" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" value="" vertex="1">
+          <mxGeometry height="60" width="1250" x="200" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontStyle=1;fontColor=#1F4E79;" value="Legend:" vertex="1">
+          <mxGeometry height="40" width="80" x="210" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#1F4E79;" value="■ ETL/Processing" vertex="1">
+          <mxGeometry height="20" width="160" x="290" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#d6b656;" value="■ Database" vertex="1">
+          <mxGeometry height="20" width="120" x="450" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#b85450;" value="■ ML / Analytics" vertex="1">
+          <mxGeometry height="20" width="140" x="570" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#C00000;" value="■ Security (RBAC)" vertex="1">
+          <mxGeometry height="20" width="150" x="710" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#7030A0;" value="■ Dashboard / Ethics" vertex="1">
+          <mxGeometry height="20" width="170" x="860" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#555555;fontStyle=2;" value="[Peer 1/2/3] = Peer feedback enhancement" vertex="1">
+          <mxGeometry height="20" width="300" x="1030" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg7" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontColor=#555555;fontStyle=2;" value="Student: Edrissa Sarr |  MSIT 5910 Capstone  |  University of the People  |  September 2026" vertex="1">
+          <mxGeometry height="20" width="1250" x="200" y="1130" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

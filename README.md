@@ -71,6 +71,14 @@ Project Charter v1.4 — ✅
 Unit 1 Discussion Post — Submitted ✅
 Unit 2 Assignment Activity — Submitted ✅
 
+Unit 3 Discussion Post — Submitted ✅
+
+Unit 3 Assignment — Submitted ✅
+
+System Architecture Diagram — Added to /database folder ✅
+
+
+
 
 
 \---
