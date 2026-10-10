@@ -89,7 +89,15 @@ EDA complete — 6 charts generated in /docs folder ✅
 
 Unit 5 ML Module — Isolation Forest + Z-Score — 2,397 flags generated ✅
 
-Unit 5 PyTest — 34/34 tests passed ✅
+Unit 5 pytest — 34/34 tests passed ✅
+
+Unit 6 Dashboard — Streamlit dashboard running with RBAC ✅
+
+Unit 6 All peer feedback commitments implemented ✅
+
+Unit 6 Doc1 — System Integration, Evaluation \& Deployment — Submitted ✅
+
+Unit 6 Doc2 — Technical Report Chapters 4, 5, 6 — Submitted ✅
 
 
 
