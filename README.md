@@ -69,6 +69,7 @@ Capstone Proposal — v5.0 (updated per stakeholder review) ✅
 Project Charter v1.4 — ✅
 
 Unit 1 Discussion Post — Submitted ✅
+
 Unit 2 Assignment Activity — Submitted ✅
 
 Unit 3 Discussion Post — Submitted ✅
