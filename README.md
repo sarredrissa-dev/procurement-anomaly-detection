@@ -69,6 +69,7 @@ Capstone Proposal — v5.0 (updated per stakeholder review) ✅
 Project Charter v1.4 — ✅
 
 Unit 1 Discussion Post — Submitted ✅
+
 Unit 2 Assignment Activity — Submitted ✅
 
 Unit 3 Discussion Post — Submitted ✅
@@ -101,7 +102,7 @@ Unit 6 Doc2 — Technical Report Chapters 4, 5, 6 — Submitted ✅
 
 Unit 7 test\_system.py — 32 integration + system + acceptance tests — 32/32 passed ✅
 
-Unit 7 All 66 tests combined — 66/66 passed in 13.93 seconds ✅
+Unit 7 All 66 tests combined — 66/66 passed in 7.68 seconds ✅
 
 Unit 7 Doc1 — System Testing \& Maintenance Plan — Submitted ✅
 

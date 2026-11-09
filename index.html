@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edrissa Sarr | MSIT Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --success: #22c55e;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 3rem; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .subtitle { font-size: 1.2rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--bg-color);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        h2 { font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 2px solid #334155; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: var(--accent); }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+        .tag {
+            background: #334155;
+            color: var(--text-main);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .metric-box {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            text-align: center;
+        }
+        .metric-num { font-size: 1.5rem; font-weight: bold; color: var(--text-main); }
+        .metric-label { font-size: 0.85rem; color: var(--text-muted); }
+        ul { list-style-position: inside; color: var(--text-muted); margin-bottom: 1rem; }
+        li { margin-bottom: 0.25rem; }
+        footer { text-align: center; margin-top: 4rem; color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Edrissa Sarr</h1>
+        <p class="subtitle">Master of Science in Information Technology (MSIT) Portfolio</p>
+        <p>University of the People, Pasadena, California</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Featured Capstone Project</h2>
+            <h3>IntegriScan — Government Procurement Anomaly Detection System</h3>
+            <p><strong>"Follow the money. Flag the risk."</strong> An ML-powered analytics platform designed to ingest public spending data, store it in an optimized relational database schema, run detection algorithms, and serve an interactive risk dashboard to government analysts.</p>
+            
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">scikit-learn</span>
+                <span class="tag">Streamlit</span>
+                <span class="tag">CI/CD Pipeline</span>
+            </div>
+
+            <h3>Key System Metrics</h3>
+            <div class="grid">
+                <div class="metric-box">
+                    <div class="metric-num">47,540</div>
+                    <div class="metric-label">Records Processed</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-num">2,397</div>
+                    <div class="metric-label">Anomaly Flags Generated</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-num">100%</div>
+                    <div class="metric-label">Test Pass Rate (66/66)</div>
+                </div>
+            </div>
+
+            <h3>Core Architecture & Modules</h3>
+            <ul>
+                <li><strong>Database Layer:</strong> Configured 5 relational tables, 3 dedicated analytical views, and 26 optimization indexes.</li>
+                <li><strong>ETL Pipeline:</strong> Streamlined ingestion pipeline handling FY2023 Department of Defense contract datasets (USASpending.gov).</li>
+                <li><strong>Machine Learning:</strong> Built anomaly workflows utilizing Isolation Forest (-0.699 average score) and Z-Score validation features.</li>
+                <li><strong>Analytics Interface:</strong> Deployed a secure Streamlit web dashboard backed by multi-level Role-Based Access Controls (RBAC).</li>
+            </ul>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="https://github.com" class="btn" target="_blank">Browse Core Source Code Repository</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Edrissa Sarr. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
